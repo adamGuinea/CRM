@@ -1,7 +1,7 @@
 # OSX
 #
 .DS_Store
-.env
+keys.js
 .flowconfig
 .buckconfig
 .gitattributes

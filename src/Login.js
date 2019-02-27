@@ -15,13 +15,8 @@ import {
     View
 } from 'react-native';
 import {MKTextField, MKColor, MKButton} from 'react-native-material-kit';
-
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+import Loader from './Loader';
+import firebase from 'firebase';
 
 const LoginButton = MKButton.coloredButton()
     .withText('LOGIN')
@@ -46,30 +41,64 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#F5FCFF',
       },
-      welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10,
+      errorMessage: {
+        marginTop: 15,
+        fontSize: 15,
+        color: 'red',
+        alignSelf: 'center',
       },
   });
 
 export default class Login extends Component {
   state = {
       email: '',
-      password: ''
+      password: '',
+      error: '',
+      loading: false,
   };
 
   onButtonPress(){
-      console.log('clicked button!')
+      const {email, password} = this.state;
+      this.setState({error: '', loading: true});
+
+      firebase.auth().signInWithEmailAndPassword(email, password)
+        .then(this.onAuthSuccess.bind(this))
+        .catch(() => {
+          firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then(this.onAuthSuccess.bind(this))
+            .catch(this.onAuthFailed.bind(this))
+        });
+  }
+
+  onAuthSuccess(){
+    this.setState({
+      email: '',
+      password: '',
+      error: '',
+      loading: false,
+    });
+  }
+
+  onAuthFailed(){
+    this.setState({
+      error: 'Authentication Failed',
+      loading: false,
+    });
+  }
+
+  renderLoader(){
+    if(this.state.loading){
+      return <Loader size='large' />
+    } else {
+      return <LoginButton onPress={this.onButtonPress.bind(this)} />
+    }
   }
 
   render() {
       const {form, fieldStyles, loginButtonArea, errorMessage, welcome, container} = styles;
     return (
-      <View style={container}>
-        <Text style={welcome}>
-            Welcome to Stellahart CRM!
-        </Text>
+      <View style={form}>
+        <Text>Login or create an account</Text>
         <MKTextField
             text={this.state.email}
             onTextChange={email => this.setState({email})}
@@ -89,7 +118,7 @@ export default class Login extends Component {
             {this.state.error}
         </Text>
         <View style={loginButtonArea}>
-            <LoginButton onPress={this.onButtonPress.bind(this)} />
+          {this.renderLoader()}
         </View>
       </View>
     );
