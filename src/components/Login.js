@@ -15,7 +15,7 @@ import {
     View
 } from 'react-native';
 import {MKTextField, MKColor, MKButton} from 'react-native-material-kit';
-import Loader from './Loader';
+import Loader from '../components/Loader';
 import firebase from 'firebase';
 
 const LoginButton = MKButton.coloredButton()
