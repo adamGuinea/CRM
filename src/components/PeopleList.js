@@ -8,16 +8,15 @@
  */
 
 import React, {Component} from 'react';
-import {Text, View, StyleSheet} from 'react-native';
+import {View, StyleSheet, ListView} from 'react-native';
 import {connect} from 'react-redux';
-import PersonItem from './PersonItem';
-import { wrap } from 'module';
+import PeopleItem from './PeopleItem';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: 353,
-    flexWrap: wrap,
+    flexWrap: 'wrap',
     paddingTop: 20,
     paddingLeft: 20,
   },
@@ -25,7 +24,7 @@ const styles = StyleSheet.create({
 
 class PeopleList extends Component {
   componentWillMount(){
-    const ds = new ListView.dataSource({
+    const ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2,
     });
     this.dataSource = ds.cloneWithRows(this.props.people);
@@ -37,7 +36,7 @@ class PeopleList extends Component {
           enableEmptySections={true}
           dataSource={this.dataSource}
           renderRow={(rowData) => 
-            <PersonItem people={rowData} />
+            <PeopleItem people={rowData} />
           }
         />
       </View>
