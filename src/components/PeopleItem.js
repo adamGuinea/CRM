@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     },
     title: {
         top: 20,
-        left: 20,
+        left: 80,
         fontSize: 24,
     },
     image: {

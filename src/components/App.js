@@ -14,7 +14,7 @@ import {Provider} from 'react-redux';
 import {createStore} from 'redux';
 import Login from './Login';
 import Loader from './Loader';
-import PeopleList from './PeopleList';
+import Navigation from './Navigation';
 import reducers from '../reducers/PeopleReducer';
 import {API_KEY, AUTH_DOMAIN,DATABASE_URL, PROJECT_ID, STORAGE_BUCKET, SENDER_ID} from '../../keys'
 
@@ -54,7 +54,7 @@ export default class App extends Component {
   renderInitialView(){
     switch(this.state.loggedIn){
       case true:
-        return <PeopleList />
+        return <Navigation />
       case false: 
         return <Login />
       default: 
