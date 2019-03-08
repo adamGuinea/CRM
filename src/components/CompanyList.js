@@ -1,14 +1,5 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- * @lint-ignore-every XPLATJSCOPYRIGHT1
- */
-
 import React, {Component} from 'react';
-import {View, StyleSheet, ListView} from 'react-native';
+import {View, StyleSheet, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const styles = StyleSheet.create({
@@ -28,16 +19,14 @@ const styles = StyleSheet.create({
 
 export default class AddPerson extends Component {
   static navigationOptions = {
-      tabBar: {
-          label: 'Companies',
-          icon: ({tintColor}) => (
-            <Icon 
-                name={'business'}
-                size={45}       
-                style={{color: tintColor}}
-            />
-          )
-      }
+    tabBarLabel: 'Companies',
+    tabBarIcon: ({tintColor}) => (
+    <Icon 
+        name={'business'}
+        size={45}       
+        style={{color: tintColor}}
+    />
+    )
   }
   render() {
     return (

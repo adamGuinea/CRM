@@ -1,9 +1,9 @@
-import {StackNavigator, TabNavigator} from 'react-navigation';
+import { createDrawerNavigator, createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation';
+import AddPerson from './AddPerson';
 import PeopleList from './PeopleList';
 import CompanyList from './CompanyList';
-import AddPerson from './AddPerson';
 
-const Navigation = TabNavigator ({
+const NavStack = createBottomTabNavigator ({
     PeopleList: {screen: PeopleList},
     AddPerson: {screen: AddPerson},
     CompanyList: {screen: CompanyList},
@@ -18,5 +18,7 @@ const Navigation = TabNavigator ({
         },
     },
 });
+
+const Navigation = createAppContainer(NavStack)
 
 export default Navigation;

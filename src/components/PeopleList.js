@@ -1,11 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- * @lint-ignore-every XPLATJSCOPYRIGHT1
- */
 
 import React, {Component} from 'react';
 import {View, StyleSheet, ListView} from 'react-native';
@@ -25,17 +17,15 @@ const styles = StyleSheet.create({
 
 class PeopleList extends Component {
   static navigationOptions = {
-    tabBar: {
-        label: 'People',
-        icon: ({tintColor}) => (
-          <Icon 
-              name={'user'}
-              size={50}       
-              style={{color: tintColor}}
-          />
-        )
-    }
-}
+    tabBarLabel: 'People',
+    tabBarIcon: ({tintColor}) => (
+      <Icon 
+          name={'user'}
+          size={50}       
+          style={{color: tintColor}}
+      />
+    )
+  }
   componentWillMount(){
     const ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2,
