@@ -1,22 +1,14 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- * @lint-ignore-every XPLATJSCOPYRIGHT1
- */
-
 import React, {Component} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import firebase from 'firebase';
 import {Provider} from 'react-redux';
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
 import Login from './Login';
 import Loader from './Loader';
 import Navigation from './Navigation';
 import reducers from '../reducers/PeopleReducer';
 import {API_KEY, AUTH_DOMAIN,DATABASE_URL, PROJECT_ID, STORAGE_BUCKET, SENDER_ID} from '../../keys'
+import Thunk from 'redux-thunk';
 
 const styles = StyleSheet.create({
   container: {
@@ -27,7 +19,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const store = createStore(reducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const store = createStore(reducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), applyMiddleware(Thunk));
 
 export default class App extends Component {
   state = {loggedIn: null};

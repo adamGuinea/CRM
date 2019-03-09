@@ -4,6 +4,14 @@ const initialState = {
     people,
     detailView: false,
     personSelected: null,
+    first_name: '', 
+    last_name: '', 
+    phone: '', 
+    email: '', 
+    company: '', 
+    notes: '', 
+    project: '',
+    loadingPeople: false,
 };
 
 export default (state = initialState, action) => {
@@ -20,9 +28,24 @@ export default (state = initialState, action) => {
                 ...state,
                 detailView: false,
                 personSelected: null,
-            }
+            };
+
+        case 'FORM_UPDATE':
+            return {
+                ...state,
+                [action.payload.prop]: action.payload.value
+            };
+
+        case 'NEW_CONTACT':
+            return initialState;
+
+        case 'ADD_PERSON': 
+            return {
+                ...state,
+                ...action.newPerson
+            };
             
         default: 
             return state;
     }
-}
+};
