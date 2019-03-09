@@ -19,7 +19,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 detailView: false,
-                personSelected: null
+                personSelected: null,
             }
             
         default: 
