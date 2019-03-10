@@ -16,6 +16,12 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch(action.type){
+        case 'INITIAL_FETCH':
+            return {
+                ...state,
+                people: action.payload,
+            }
+
         case 'SELECTED_PERSON':
             return {
                 ...state,
@@ -37,7 +43,16 @@ export default (state = initialState, action) => {
             };
 
         case 'NEW_CONTACT':
-            return initialState;
+            return {
+                ...state,
+                first_name: '', 
+                last_name: '', 
+                phone: '', 
+                email: '', 
+                company: '', 
+                notes: '', 
+                project: '',
+            }
 
         case 'ADD_PERSON': 
             return {

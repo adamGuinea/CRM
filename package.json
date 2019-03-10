@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "firebase": "^5.8.4",
+    "lodash": "^4.17.11",
     "react": "16.6.3",
     "react-native": "0.58.5",
     "react-native-material-kit": "^0.5.1",

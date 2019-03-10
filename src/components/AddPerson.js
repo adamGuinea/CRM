@@ -46,7 +46,7 @@ class AddPerson extends Component {
 
     this.props.createNewContact({first_name, last_name, phone, email, company, notes, project});
 
-    this.props.navigate('PeopleList');
+    this.props.navigation.navigate('PeopleList');
   }
 
   render() {
