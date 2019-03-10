@@ -1,9 +1,7 @@
 import React from 'react';
-import {Text, View, StyleSheet, Image, TouchableWithoutFeedback} from 'react-native';
-import {connect} from 'react-redux';
+import {Text, View, StyleSheet, Image} from 'react-native';
 import {getTheme} from 'react-native-material-kit';
-import Icon from 'react-native-vector-icons/EvilIcons';
-import * as actions from '../actions';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const theme = getTheme();
 
@@ -22,6 +20,8 @@ const styles = StyleSheet.create({
     action: {
         backgroundColor: 'black',
         color: 'white',
+        paddingTop: 5,
+        paddingBottom: 5,
     },
     icon: {
         position: 'absolute',
@@ -32,26 +32,30 @@ const styles = StyleSheet.create({
     },
 });
 
-const PeopleItem = (props) => {
+const CompanyItem = (props) => {
     return (
-        <TouchableWithoutFeedback
-            onPress={() => props.selectPerson(props.people)}
-        >
+        <View>
             <View style={[theme.cardStyle, styles.card]}>
                 <Image 
                     source={{uri:'/Users/adamguinea/Documents/Projects/CRM/CRM/src/images/background.jpg'}}
                     style={[theme.cardImageStyle, styles.image]}
-                />
+                    />
                 <Icon 
-                    name={'user'}
+                    name={'business'}
                     size={100}       
                     style={styles.icon}
-                />
-                <Text style={[theme.cardTitleStyle, styles.title]}>{props.people.first_name} {props.people.last_name}</Text>
-                <Text style={[theme.cardActionStyle, styles.action]}>{props.people.company}</Text>
+                    />
+                <Text style={[theme.cardTitleStyle, styles.title]}>{props.companies.company}</Text>
+                {props.companies.names.map((name) => {
+                    return (
+                        <Text style={[theme.cardActionStyle, styles.action]}>
+                            {name.first_name} {name.last_name} - Project: {name.project}
+                        </Text>
+                    );
+                })}
             </View>
-        </TouchableWithoutFeedback>
+        </View>
     )
 }
 
-export default connect(null, actions)(PeopleItem);
+export default CompanyItem;
