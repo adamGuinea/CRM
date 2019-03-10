@@ -1,6 +1,6 @@
 
 import React, {Component} from 'react';
-import {Text, View, StyleSheet, ScrollView} from 'react-native';
+import {Text, View, StyleSheet, ScrollView, Image} from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import {MKTextField, MKColor, MKButton} from 'react-native-material-kit';
 import {connect} from 'react-redux';
@@ -22,7 +22,20 @@ const styles = StyleSheet.create({
   },
   addButton: {
     marginTop: 20,
-  }
+  },
+  addButton: {
+    marginBottom: 15,
+
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    paddingTop: 10,
+    paddingBottom: 10,
+  },
+  update: {
+    marginTop: 30,
+  },
 });
 
 const UpdateButton = MKButton.coloredButton()
@@ -33,11 +46,10 @@ class UpdatePerson extends Component {
   static navigationOptions = {
     tabBarLabel: 'Add Person',
     tabBarIcon: ({tintColor}) => (
-    <Icon 
-        name={'plus'}
-        size={70}       
-        style={[{color: tintColor}, styles.icon]}
-    />
+      <Image 
+        style={styles.addButton}
+        source={require('../../ios/CRM/Images.xcassets/addbutton3x.png')}
+      />
     )
   }
 
@@ -52,7 +64,7 @@ class UpdatePerson extends Component {
     return (
       <ScrollView showsHorizontalScrollIndicator={false}>
         <View style={styles.form}>
-          <Text>Update Contact</Text>
+          <Text style={styles.title}>Update Contact</Text>
           <MKTextField 
             textInputStyle={styles.fieldStyles}
             placeholder={'First Name'}
@@ -102,7 +114,7 @@ class UpdatePerson extends Component {
             value={this.props.notes}
             onChangeText={value => this.props.formUpdate({prop: 'notes', value})}
           />
-          <View style={styles.addButton}>
+          <View style={styles.update}>
             <UpdateButton onPress={this.onUpdatePress.bind(this)}/>
           </View>
         </View>

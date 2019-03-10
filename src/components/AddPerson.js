@@ -21,7 +21,16 @@ const styles = StyleSheet.create({
     color: MKColor.Orange,
   },
   addButton: {
-    marginTop: 20,
+    marginTop: 15,
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    paddingTop: 10,
+    paddingBottom: 10,
+  },
+  add: {
+    marginTop: 30,
   }
 });
 
@@ -53,7 +62,7 @@ class AddPerson extends Component {
     return (
       <ScrollView showsHorizontalScrollIndicator={false}>
         <View style={styles.form}>
-          <Text>Add a new Contact</Text>
+          <Text style={styles.title}>Add a new Contact</Text>
           <MKTextField 
             textInputStyle={styles.fieldStyles}
             placeholder={'First Name'}
@@ -103,7 +112,7 @@ class AddPerson extends Component {
             value={this.props.notes}
             onChangeText={value => this.props.formUpdate({prop: 'notes', value})}
           />
-          <View style={styles.addButton}>
+          <View style={styles.add}>
             <AddButton onPress={this.onAddPress.bind(this)}/>
           </View>
         </View>
