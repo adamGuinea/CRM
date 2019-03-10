@@ -52,4 +52,23 @@ export const deleteContact = (uid) => {
             dispatch({type: 'DELETE_CONTACT'})
         });
     };
+};
+
+export const updateContact = (personSelected) => {
+    return {
+        type: 'UPDATE_CONTACT',
+        payload: personSelected,
+    };
+};
+
+export const saveContact = ({first_name, last_name, phone, email, company, notes, project, uid}) => {
+    const {currentUser} = firebase.auth();
+
+    return (dispatch) => {
+        firebase.database().ref(`/users/${currentUser.uid}/people/${uid}`)
+        .set({first_name, last_name, phone, email, company, notes, project, uid})
+        .then(() => {
+            dispatch({type: 'SAVE_CONTACT'})
+        });
+    };
 }
